@@ -72,20 +72,34 @@ For each API response:
 ## 6. Execution Instructions
 
 ### Step 1: Clone Repository
-
+```
 git clone https://github.com/iam-raaz2491/assurity-performancetesting-assignment.git  
 cd assurity-performancetesting-assignment  
-
+```
 ---
 
 ### Step 2: Run Test in Non-GUI Mode
-
+```
 jmeter -n -t test-plan/assurity-test.jmx -l test-plan/results/test-results.jtl  
-
+```
 Parameters:
 - -n → Non-GUI mode execution  
 - -t → Test plan file  
-- -l → Raw results file (.jtl)  
+- -l → Raw results file (.jtl)
+
+Optional: Override Runtime Parameters (if configured in JMX)
+
+If the test plan is parameterized using JMeter properties, execution values can be overridden from CLI:
+```
+jmeter -n -t test-plan/assurity-test.jmx -l test-plan/results/test-results.jtl -Jthreads=5 -JrampUp=5 -Jduration=60
+```
+This allows flexibility when:
+- Running different load configurations
+- Integrating with CI/CD pipelines
+- Avoiding changes to the JMX file
+
+Note
+If the JMX file does not use these variables (${threads}, ${rampUp}, ${duration}), the -J parameters will be ignored.
 
 ---
 
