@@ -19,8 +19,13 @@ The test ensures:
 - Scripting Language: Groovy (JSR223 PostProcessor)  
 - Execution Mode: Non-GUI (CLI supported)  
 - API Endpoint:  
-  https://api.tmsandbox.co.nz/v1/Categories/{id}/Details.json  
+  https://api.tmsandbox.co.nz/v1/Categories/{id}/Details.json
+   
+- `{id}` is dynamically read from the input data file:  
+  `data/categoryIDs.csv`
 
+- Example request URL:  
+  https://api.tmsandbox.co.nz/v1/Categories/6327/Details.json
 ---
 
 ## 3. Workspace Architecture
@@ -45,7 +50,7 @@ The test ensures:
 
 ---
 
-## 4. Functional Requirements Covered
+## 4. Functional Requirements
 
 For each API response:
 
@@ -201,7 +206,7 @@ The combination of functional and performance validation confirms overall API re
 The following artifacts support the test execution:
 
 - Raw JMeter Results:  
-  `test-plan/results/test-results.jtl`
+  `results/test-results.jtl`
 
 - Extracted CSV Output:  
   `results/results.csv`
@@ -215,7 +220,7 @@ These provide full traceability from execution → validation → reporting.
 
 ## 8.7 Conclusion
 
-The API demonstrates stable performance and correct functional behavior under the defined workload.
+The API shows stable performance and behaves correctly under the defined workload.
 
 Key outcomes:
 - Successful handling of concurrent requests
