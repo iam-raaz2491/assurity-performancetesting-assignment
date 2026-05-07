@@ -259,7 +259,7 @@ Contains 10 Category IDs used for API execution.
 
 ---
 
-## 11. Output Generated
+## 12. Output Generated
 
 CSV format:
 
@@ -269,7 +269,7 @@ Each promotion is written as a separate row.
 
 ---
 
-## 12. Assumptions
+## 13. Assumptions
 
 - API is publicly accessible  
 - No authentication required  
@@ -279,7 +279,7 @@ Each promotion is written as a separate row.
 
 ---
 
-## 13. Limitations
+## 14. Limitations
 
 - No distributed load testing  
 - No APM or monitoring integration  
@@ -288,7 +288,7 @@ Each promotion is written as a separate row.
 
 ---
 
-## 14. Conclusion
+## 15. Conclusion
 
 The API demonstrates stable functional and performance behaviour under the defined workload model.
 
