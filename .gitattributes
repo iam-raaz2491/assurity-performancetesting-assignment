@@ -1,0 +1,8 @@
+* text=auto
+
+# Force LF for code and test assets
+*.jmx text eol=lf
+*.groovy text eol=lf
+*.csv text eol=lf
+*.json text eol=lf
+*.md text eol=lf
