@@ -126,23 +126,22 @@ log.info(&quot;CategoryId--------&gt; &quot; + vars.get(&quot;categoryId&quot;))
           <stringProp name="script">import groovy.json.JsonSlurper
 import org.apache.jmeter.services.FileServer
 
-// 1. Get the directory of the .jmx file (E:\Assurity\assurity-assignment\test-plan)
+//Directory of the .jmx file
 def scriptDir = new File(FileServer.getFileServer().getBaseDir())
 
-// 2. Get the parent directory (E:\Assurity\assurity-assignment)
+//Parent directory
 def projectRoot = scriptDir.getParent()
 
-// 3. Define and create the results directory at the root level
+//Define and create the results directory at the root level
 def resultsDir = new File(projectRoot + File.separator + &quot;results&quot;)
 if (!resultsDir.exists()) {
     resultsDir.mkdirs()
 }
 
-// 4. Define the file object
+//Define the file object
 def file = new File(resultsDir, &quot;results.csv&quot;)
 log.info(&quot;WRITING FILE TO: &quot; + file.getAbsolutePath())
 
-// --- Rest of your logic remains the same ---
 
 def responseBody = prev.getResponseDataAsString()
 if (!responseBody) return
