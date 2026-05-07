@@ -119,6 +119,54 @@ log.info(&quot;CategoryId--------&gt; &quot; + vars.get(&quot;categoryId&quot;))
           </JSR223Assertion>
           <hashTree/>
         </hashTree>
+        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Category data extraction" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">import groovy.json.JsonSlurper
+import org.apache.jmeter.services.FileServer
+
+// 1. Get the directory of the .jmx file (E:\Assurity\assurity-assignment\test-plan)
+def scriptDir = new File(FileServer.getFileServer().getBaseDir())
+
+// 2. Get the parent directory (E:\Assurity\assurity-assignment)
+def projectRoot = scriptDir.getParent()
+
+// 3. Define and create the results directory at the root level
+def resultsDir = new File(projectRoot + File.separator + &quot;results&quot;)
+if (!resultsDir.exists()) {
+    resultsDir.mkdirs()
+}
+
+// 4. Define the file object
+def file = new File(resultsDir, &quot;results.csv&quot;)
+log.info(&quot;WRITING FILE TO: &quot; + file.getAbsolutePath())
+
+// --- Rest of your logic remains the same ---
+
+def responseBody = prev.getResponseDataAsString()
+if (!responseBody) return
+
+def response = new JsonSlurper().parseText(responseBody)
+def categoryId = response.CategoryId
+def name       = response.Name
+def path       = response.Path
+def promotions = response.Promotions
+
+if (!file.exists() || file.length() == 0) {
+    file &lt;&lt; &quot;CategoryID,Name,Path,PromotionID,Price\n&quot;
+}
+
+if (promotions != null &amp;&amp; !promotions.isEmpty()) {
+    promotions.each { promo -&gt;
+        file &lt;&lt; [categoryId, name, path, promo?.Id ?: &quot;&quot;, promo?.Price ?: &quot;&quot;].join(&quot;,&quot;) + &quot;\n&quot;
+    }
+} else {
+    file &lt;&lt; [categoryId, name, path, &quot;&quot;, &quot;&quot;].join(&quot;,&quot;) + &quot;\n&quot;
+}</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223PostProcessor>
+        <hashTree/>
         <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Throughput Timer" enabled="true">
           <intProp name="calcMode">1</intProp>
           <stringProp name="throughput">${__P(throughput,10)}</stringProp>
